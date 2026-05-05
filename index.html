@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam Duffy — Writer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --cream-dark: #F0EAE0;
+    --brown-light: #C4A882;
+    --brown: #8B6B4A;
+    --brown-dark: #5C4433;
+    --text: #2E2118;
+    --text-muted: #7A6455;
+    --border: #DDD0C0;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--brown-dark);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--brown-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 2rem 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-text { max-width: 520px; }
+
+  .hero-image-wrap img {
+    width: 100%;
+    border-radius: 16px;
+    display: block;
+    box-shadow: 0 8px 40px rgba(92, 68, 51, 0.15);
+  }
+
+  @media (max-width: 780px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-image-wrap { max-width: 320px; margin: 0 auto; }
+  }
+
+  .hero-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--brown-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--brown);
+  }
+
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--brown-dark);
+    color: var(--cream);
+  }
+
+  .btn-primary:hover { background: var(--brown); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--brown-dark);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    background: var(--cream-dark);
+    border-color: var(--brown-light);
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: var(--brown-dark);
+    margin-bottom: 3rem;
+  }
+
+  /* SAMPLES */
+  .samples-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sample-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .sample-card:hover {
+    border-color: var(--brown-light);
+    box-shadow: 0 4px 24px rgba(92, 68, 51, 0.08);
+  }
+
+  .sample-header {
+    padding: 1.5rem 1.75rem 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .sample-meta {
+    flex: 1;
+  }
+
+  .sample-type {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
+    background: var(--cream-dark);
+    border-radius: 100px;
+    padding: 0.2rem 0.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .sample-title {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--brown-dark);
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+
+  .sample-description {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .sample-toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 14px;
+    color: var(--brown);
+    cursor: pointer;
+  }
+
+  .sample-card.open .sample-toggle {
+    background: var(--brown-dark);
+    color: var(--cream);
+    border-color: var(--brown-dark);
+    transform: rotate(45deg);
+  }
+
+  .sample-body {
+    display: none;
+    padding: 0 1.75rem 1.75rem;
+    border-top: 1px solid var(--cream-dark);
+  }
+
+  .sample-card.open .sample-body { display: block; }
+
+  .sample-text {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: var(--text);
+    white-space: pre-wrap;
+    margin-top: 1.25rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .sample-text strong {
+    font-weight: 500;
+    color: var(--brown-dark);
+  }
+
+  .sample-result {
+    margin-top: 1.25rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--cream);
+    border-left: 3px solid var(--brown-light);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .sample-result a {
+    color: var(--brown-dark);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sample-result a:hover { color: var(--brown); }
+
+  /* ABOUT */
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .detail-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brown-light);
+  }
+
+  .detail-value {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .detail-value a {
+    color: var(--brown-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .detail-value a:hover { color: var(--brown); }
+
+  /* CONTACT */
+  .contact-inner {
+    background: var(--brown-dark);
+    border-radius: 16px;
+    padding: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-text .section-label { color: var(--brown-light); }
+
+  .contact-text h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--cream);
+    margin-top: 0.5rem;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .btn-cream {
+    background: var(--cream);
+    color: var(--brown-dark);
+  }
+
+  .btn-cream:hover { background: var(--cream-dark); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(250,247,242,0.3);
+  }
+
+  .btn-ghost:hover { background: rgba(250,247,242,0.1); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--brown-light);
+    border-top: 1px solid var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1.25rem; }
+    section { padding: 3.5rem 1.25rem; }
+    .hero { padding: 5rem 1.25rem 3rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-inner { padding: 2rem 1.5rem; }
+    .sample-header { padding: 1.25rem; }
+    .sample-body { padding: 0 1.25rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Sam Duffy</a>
+  <ul class="nav-links">
+    <li><a href="#samples">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+    <p class="hero-label">Communications & Copywriting</p>
+    <h1>Words that make<br><em>people pay attention.</em></h1>
+    <p class="hero-bio">I'm a Calgary-based communications professional with a knack for finding the story that makes people pay attention. I've worked across industries, turning complex ideas into sharp, compelling copy that gets results. I'm passionate about the craft of writing and always looking for new ways to put it to work.</p>
+    <div class="hero-actions">
+      <a href="#samples" class="btn btn-primary">See my work</a>
+      <a href="Sam J Duffy - Resume.pdf" class="btn btn-outline" download>Download resume</a>
+    </div>
+    </div>
+    <div class="hero-image-wrap">
+      <img src="ChatGPT_Image_May_5__2026__04_50_00_PM.png" alt="Sam Duffy">
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SAMPLES -->
+<section id="samples">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-title">Writing samples</h2>
+
+  <div class="samples-grid">
+
+    <!-- Sample 1 -->
+    <div class="sample-card" id="card-1">
+      <div class="sample-header" onclick="toggleCard('card-1')">
+        <div class="sample-meta">
+          <span class="sample-type">Media pitch</span>
+          <p class="sample-title">Wildfires & digital twins: pitching a safety tech story during a crisis</p>
+          <p class="sample-description">A timely pitch connecting Alberta wildfire shutdowns to emerging digital twin technology — landed coverage during an active news cycle.</p>
+        </div>
+        <div class="sample-toggle">+</div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-text"><strong>Subject lines:</strong>
+Wildfires shut-in oil production. This new technology is helping companies adapt
+As wildfires force oil site evacuations, this tech is critical to safety
+
+Hi [Reporter],
+
+Wildfires have now shut-in over 300,000 barrels per day of oil production in Alberta. Cenovus Energy, MEG Energy Corporation and Canadian Natural Resources have all had to evacuate workers from sites.
+
+As production is shut-in, workers need a way to effectively plan restarts to operations.
+
+Calgary-based VEERUM is creating digital twins — visual representations of site conditions — to help workers access current site conditions from the safety and convenience of the home or office.
+
+"By using digital twins, oil companies can plan operations and maintenance activities without travelling to site, cutting down on the number of hours and dollars spent travelling to remote and hazardous sites," says Jordan Mathieson, Marketing Director at VEERUM.
+
+"The world's largest asset owners are already adopting this as standard for their critical remote infrastructure," he adds.
+
+Can I connect you with Jordan to chat about how digital twins are essential to ensuring safety at oil sites?</div>
+        <div class="sample-result">
+          <strong>Result:</strong> Landed media coverage during an active Alberta wildfire news cycle. <a href="https://archive.is/sbt3V" target="_blank" rel="noopener">Read the story →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample 2 -->
+    <div class="sample-card" id="card-2">
+      <div class="sample-header" onclick="toggleCard('card-2')">
+        <div class="sample-meta">
+          <span class="sample-type">Media pitch</span>
+          <p class="sample-title">Reframing the AI conversation: why ad targeting is a brand's safest bet</p>
+          <p class="sample-description">A contrarian pitch that cut through the anti-AI backlash with a nuanced, data-backed angle — picked up by AdExchanger.</p>
+        </div>
+        <div class="sample-toggle">+</div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-text"><strong>Subject lines:</strong>
+AI might be a problem for creative, but for ad targeting, it's boosting recall by 20%
+As brands crack down on AI in their ad campaigns, they're leaving millions on the table
+Brands shouldn't fear AI in ad targeting despite pushback, says industry expert
+
+Hi [Reporter],
+
+Brands are now putting restrictions on AI in their contracts with ad agencies. Although some brands are reasonably worried about the dangers of AI in the creative process, one industry expert says that when it comes to ad targeting with AI, brands should dive straight in.
+
+"Ad targeting with AI can increase ad recall and attention by 20%," says Josh Rosen, President of Hotspex Media, a Toronto-based digital media agency. "There's no risk of accidental plagiarism, AI hallucinations, or intellectual property theft on the ad targeting side of the business. It's all upside, since AI targeting can not only ensure brand safety, but make perfect placements that connect with the right customers at exactly the right moment."
+
+Can I connect you with Josh to chat about why brands shouldn't be nervous to embrace the newest AI innovations in the industry?</div>
+        <div class="sample-result">
+          <strong>Result:</strong> Featured in AdExchanger. <a href="https://www.adexchanger.com/ai/how-a-digital-media-agency-built-its-own-ai-powered-contextual-targeting-tool/" target="_blank" rel="noopener">Read the story →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample 3 -->
+    <div class="sample-card" id="card-3">
+      <div class="sample-header" onclick="toggleCard('card-3')">
+        <div class="sample-meta">
+          <span class="sample-type">Press release</span>
+          <p class="sample-title">Opening doors for Alberta's youth: MCL Height Safety open day</p>
+          <p class="sample-description">A press release tying a facility open day to national youth unemployment trends — generated broadcast coverage on CityNews Calgary.</p>
+        </div>
+        <div class="sample-toggle">+</div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-text"><strong>MCL Height Safety showcases training for fast-growing job sectors at Calgary open day</strong>
+
+Calgary, AB — October 8 — MCL Height Safety is opening the doors to its state-of-the-art facility on October 24 to showcase their training center which prepares workers for jobs in some of Canada's fastest-growing industries like construction, oil & gas, and green energy.
+
+With the unemployment rate for young Canadians hitting 14.6%, many are looking for opportunities in major infrastructure and the quickly-growing renewables sector. The first step is getting the right training.
+
+"Our facilities are the closest you can get to a wind turbine without actually being there. Forget online courses. We've recreated real-world site scenarios for hands-on training right here in Calgary. Our experienced instructors run live demos where students learn to use the equipment they'll actually see in the field," says Martin Castle, General Manager at MCL Height Safety.
+
+"Most of the courses we offer are for GWO (Global Wind Organization) training, which prepares workers for jobs on wind turbines. We've seen an explosion of interest in this sector. Registrations are up by 30% compared to last year," adds Martin Castle.
+
+MCL's open day will kick off at 10am with an introduction to their array of courses. In the afternoon, attendees will see live demonstrations at MCL's state-of-the-art training facility.
+
+The event will be held at MCL's facility at 7155 57 St SE Unit 107, Calgary, Alberta.</div>
+        <div class="sample-result">
+          <strong>Result:</strong> Generated broadcast coverage on CityNews Calgary. <a href="https://calgary.citynews.ca/video/2025/10/24/hard-hats-and-harnesses-how-hands-on-training-is-opening-doors-for-albertas-youth/" target="_blank" rel="noopener">Watch the segment →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample 4 -->
+    <div class="sample-card" id="card-4">
+      <div class="sample-header" onclick="toggleCard('card-4')">
+        <div class="sample-meta">
+          <span class="sample-type">Media pitch</span>
+          <p class="sample-title">The $1 trillion burnout problem — and what companies can do now</p>
+          <p class="sample-description">A pitch connecting workplace burnout data to a concrete expert voice, building a timely national conversation around mental health at work.</p>
+        </div>
+        <div class="sample-toggle">+</div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-text"><strong>Subject lines:</strong>
+Burnout costs employers $3,400 of every $10,000 in salary: How orgs can adapt
+How a corporate wellness focus can save $1 trillion in productivity
+92% of employees say employers aren't doing enough for their mental health
+One-third of Americans say work impacts their mental health: What orgs can do about it
+
+Hi [Reporter],
+
+One-third of Americans say work is adversely impacting their mental health, and 80% say they feel stress at work. These burned out employees are costing employers $3,400 of every $10,000 in salary as productivity decreases. And depression alone is costing the global economy $1 billion in lost productivity.
+
+One corporate wellness expert says companies need to respond to employee needs now — by respecting boundaries and the right to disconnect — before resentment and burnout make top performers leave.
+
+"Companies usually wait until it's too late to act on burnout. They need to start embracing preventative solutions," says burnout expert Renée Zavislak, a licensed California-based therapist. "When someone's job security depends on working 60-80 hours a week and taking calls while on vacation, it means companies aren't taking mental health seriously. One solution would be forcing employees to take vacations to recharge. For example, the offices of Duolingo are closed for two weeks over the winter so employees can focus on enjoying the holidays. Those at the top need to model healthy practices."
+
+Can I connect you with Renée to chat about how burnout culture is destroying companies, and what leadership can do about it?</div>
+        <div class="sample-result">
+          <strong>Result:</strong> This pitch contributed to national coverage on workplace burnout, including this piece in Forbes. <a href="https://www.forbes.com/sites/bryanrobinson/2024/05/21/74-of-employees-report-negative-mental-health-at-work/" target="_blank" rel="noopener">Read the story →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample 5 -->
+    <div class="sample-card" id="card-5">
+      <div class="sample-header" onclick="toggleCard('card-5')">
+        <div class="sample-meta">
+          <span class="sample-type">Press release</span>
+          <p class="sample-title">Dania Furniture partners with the Seattle Seahawks</p>
+          <p class="sample-description">A corporate partnership announcement blending sports culture with brand storytelling — picked up across sports and business media.</p>
+        </div>
+        <div class="sample-toggle">+</div>
+      </div>
+      <div class="sample-body">
+        <div class="sample-text"><strong>DANIA FURNITURE TO PARTNER WITH THE SEATTLE SEAHAWKS</strong>
+
+SEATTLE, WA, Nov. 12, 2024 — The Seattle Seahawks are fighting for a playoff spot, and to make it work, they're relying on fans more than ever to give them a valuable home field advantage.
+
+The Pacific Division of Dania Furniture, a sister brand to Scandinavian Designs, is partnering with the Seattle Seahawks for the upcoming football season to deliver the ultimate fan experience on and off the field.
+
+"At Dania Furniture, we're thrilled to partner with the Seattle Seahawks, another iconic Seattle brand with deep roots in the community. We've installed Dania Furniture Field Seats at Lumen Field which offer fans far more comfort than regular stadium seats," explains Chief Administrative Officer Mark Gehler.
+
+"We look forward to joining the excitement, while showing fans the modern and versatile home furnishing solutions we offer for their own homes, including beautiful, high-quality furniture for both game-day festivities and everyday comfort," he adds.
+
+The partnership between Dania Furniture and the Seattle Seahawks is a three-year deal. The visitors tunnel has been painted with Dania Furniture's logo. The Idaho-based furniture company is also hosting games for fans in attendance, including musical chairs and a quiz show.
+
+<em>Dania Furniture | Scandinavian Designs is a contemporary home furnishing destination rooted in a love for Nordic culture, modern design and quality craftsmanship. Headquartered in Boise, Idaho, and boasting 46 showroom locations across 16 states, Dania Furniture | Scandinavian Designs has been a leader in Nordic-inspired furniture designs since 1963.</em></div>
+        <div class="sample-result">
+          <strong>Result:</strong> Picked up across sports and business media. <a href="https://archive.is/FM8Lz" target="_blank" rel="noopener">Read the story →</a>
+        </div>
+      </div>
+</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">About me</h2>
+  <div class="about-inner">
+    <div class="about-text">
+      I'm a Calgary-based communications professional with a knack for finding the story that makes people pay attention. I've worked across industries, turning complex ideas into sharp, compelling copy that gets results. I'm passionate about the craft of writing and always looking for new ways to put it to work.
+    </div>
+    <div class="about-details">
+      <div class="detail-item">
+        <span class="detail-label">Based in</span>
+        <span class="detail-value">Calgary, Alberta</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Background</span>
+        <span class="detail-value">Public relations & communications</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">LinkedIn</span>
+        <span class="detail-value"><a href="https://www.linkedin.com/in/sam-duffy-6a48711b6/" target="_blank" rel="noopener">linkedin.com/in/sam-duffy</a></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Resume</span>
+        <span class="detail-value"><a href="Sam J Duffy - Resume.pdf" download>Download PDF</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-text">
+      <p class="section-label">Get in touch</p>
+      <h2>Let's work together.</h2>
+    </div>
+    <div class="contact-actions">
+      <a href="mailto:samduffy14@hotmail.ca" class="btn btn-cream">samduffy14@hotmail.ca</a>
+      <a href="https://www.linkedin.com/in/sam-duffy-6a48711b6/" target="_blank" rel="noopener" class="btn btn-ghost">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Sam Duffy. Built and hosted on GitHub Pages.
+</footer>
+
+<script>
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
